@@ -35,7 +35,7 @@ async function fetchTiles(db, client, apiKey, zoom, bbox, concurrency) {
     await Promise.map(columns, async (column) => {
       const hasTile = await db.hasTile(zoom, column, row)
       if (!hasTile) {
-        const tile = await fetchTileWithRetry(client, row, column, zoom, apiKey)
+        const tile = await fetchTileWithRetry(client, zoom, column, row, apiKey)
         await db.putTile(tile, zoom, column, row)  
       }
     }, {concurrency})
@@ -50,12 +50,12 @@ async function fetchTiles(db, client, apiKey, zoom, bbox, concurrency) {
   console.log(`Next zoom level should take about ${minutes.toFixed(2) * 4} minutes`)
 }
 
-async function fetchTileWithRetry(client, row, column, zoom, apiKey, retries = 10) {
+async function fetchTileWithRetry(client, z, x, y, apiKey, retries = 10) {
   for (let retry = 0; retry < retries; retry += 1) {
     try {
-      const tile = await fetchTile(client, row, column, zoom, apiKey)
+      const tile = await fetchTile(client, z, x, y, apiKey)
       if (retry > 0) {
-        console.log(`Retried tile ${zoom}/${column}/${row} ${retry} times`)
+        console.log(`Retried tile ${z}/${y}/${x} ${retry} times`)
       }
       return tile
     } catch(err) {
@@ -65,15 +65,15 @@ async function fetchTileWithRetry(client, row, column, zoom, apiKey, retries = 1
     }
     await Promise.delay((retry + 1) * 500)
   }
-  throw new Error(`Failed to fetch tile ${zoom}/${column}/${row}, tried ${retries} times`)
+  throw new Error(`Failed to fetch tile ${z}/${y}/${x}, tried ${retries} times`)
 }
 
-async function fetchTile(client, row, column, zoom, apiKey) {
+async function fetchTile(client, z, x, y, apiKey) {
   const params = {
     'api-key': apiKey
   }
 
-  return (await client.get(`${zoom}/${column}/${row}.pbf`, {params, responseType: 'arraybuffer'})).data
+  return (await client.get(`${z}/${y}/${x}.pbf`, {params, responseType: 'arraybuffer'})).data
 }
 
 module.exports = WmtsToMbtiles
