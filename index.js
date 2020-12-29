@@ -21,4 +21,10 @@ const maxzoom = Number(cmd.maxzoom)
 const concurrency = Number(cmd.concurrency)
 
 WmtsToMbtiles(cmd.output, NLS_MVT_BASE_URL, apiKey, 'finland', minzoom, maxzoom, bbox, concurrency)
-  .catch(console.error)
+  .catch(err => {
+    if (err.response) {
+      console.error(`HTTP request failed: ${err.response.status} ${err.response.statusText}`)
+    } else {
+      console.error(err)
+    }
+  })
