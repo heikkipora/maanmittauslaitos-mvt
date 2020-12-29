@@ -1,5 +1,5 @@
-const program = require('commander')
-const WmtsToMbtiles = require('./src/wmts-to-mbtiles')
+import program from 'commander'
+import {WmtsToMbtiles} from './wmts-to-mbtiles.js'
 
 const DEFAULT_BBOX_FINLAND = '17.61 58.79 33.83 70.63'
 const NLS_MVT_BASE_URL = 'https://avoin-karttakuva.maanmittauslaitos.fi/vectortiles/taustakartta/wmts/1.0.0/taustakartta/default/v20/WGS84_Pseudo-Mercator/'

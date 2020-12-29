@@ -1,5 +1,5 @@
 import program  from 'commander'
-import {initServer} from './mbtiles-server.js'
+import {initServer} from './tile-server.js'
 
 const cmd = program
   .requiredOption('--input [mbtiles]', 'Input file')
