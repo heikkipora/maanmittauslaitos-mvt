@@ -1,10 +1,10 @@
-const axios = require('axios')
-const {createMBTiles} = require('./mbtiles-db')
-const https = require('https')
-const Promise = require('bluebird')
-const {determineRowsToFetch, determineColumnsToFetch} = require('./utils')
+import axios from 'axios'
+import {createMBTiles} from './mbtiles-db.js'
+import https from 'https'
+import Promise from 'bluebird'
+import {determineRowsToFetch, determineColumnsToFetch}  from './utils.js'
 
-async function WmtsToMbtiles(mbtilesFile, wmtsUrl, apiKey, name, minzoom, maxzoom, bbox, concurrency) {
+export async function WmtsToMbtiles(mbtilesFile, wmtsUrl, apiKey, name, minzoom, maxzoom, bbox, concurrency) {
   const client = axios.create({
     baseURL: wmtsUrl,
     httpsAgent: new https.Agent({keepAlive: true}),
@@ -75,5 +75,3 @@ async function fetchTile(client, z, x, y, apiKey) {
 
   return (await client.get(`${z}/${y}/${x}.pbf`, {params, responseType: 'arraybuffer'})).data
 }
-
-module.exports = WmtsToMbtiles

@@ -1,2 +1,4 @@
 node_modules
 *.mbtiles
+.DS_Store
+public/client.css

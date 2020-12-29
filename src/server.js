@@ -1,5 +1,5 @@
-const program = require('commander')
-const {initServer} = require('./src/mbtiles-server')
+import program  from 'commander'
+import {initServer} from './mbtiles-server.js'
 
 const cmd = program
   .requiredOption('--input [mbtiles]', 'Input file')
@@ -9,6 +9,6 @@ const cmd = program
 const {input} = cmd
 const port = Number(cmd.port)
 
-initServer(input)
+initServer(input, port)
   .then(() => console.log(`Tile server listening on port ${port}`))
   .catch(console.error)

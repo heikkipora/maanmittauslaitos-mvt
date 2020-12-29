@@ -1,6 +1,6 @@
-const _ = require('lodash')
+import _ from 'lodash'
 
-function determineRowsToFetch(zoom, requestedBbox) {
+export function determineRowsToFetch(zoom, requestedBbox) {
   function getRow(lat) {
     const row = latitudeToTileRow(lat, zoom)
     return row
@@ -10,7 +10,7 @@ function determineRowsToFetch(zoom, requestedBbox) {
   return _.range(row0, row1)
 }
 
-function determineColumnsToFetch(zoom, requestedBbox) {
+export function determineColumnsToFetch(zoom, requestedBbox) {
   function getColumn(lon) {
     const col = longitudeToTileColumn(lon, zoom)
     return col
@@ -26,9 +26,4 @@ function latitudeToTileRow(lat, zoom) {
 
 function longitudeToTileColumn(lon, zoom) {
   return Math.floor((lon + 180) / 360 * Math.pow(2, zoom))
-}
-
-module.exports = {
-  determineRowsToFetch,
-  determineColumnsToFetch
 }
