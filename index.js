@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const program = require('commander')
 const WmtsToMbtiles = require('./src/wmts-to-mbtiles')
 
