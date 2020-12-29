@@ -1,4 +1,6 @@
+import styleFunction from 'ol-mapbox-style/dist/stylefunction'
 import {defaults as defaultInteractions} from 'ol/interaction'
+import glStyle from './style-contours.json'
 import Map from 'ol/Map'
 import MVT from 'ol/format/MVT'
 import VectorTileLayer from 'ol/layer/VectorTile'
@@ -12,7 +14,7 @@ export function createMap(settings, target) {
   const view = new View({
     center,
     minZoom: 0,
-    maxZoom: 14,
+    maxZoom: 20,
     projection: 'EPSG:3857',
     zoom
   })
@@ -32,10 +34,13 @@ function createMVTLayer() {
   const source = new VectorTileSource({
     format: new MVT(),
     url: '/{z}/{x}/{y}.pbf',
+    maxZoom: 14
   })
 
-  return new VectorTileLayer({
+  const layer = new VectorTileLayer({
     declutter: true,
     source
   })
+  styleFunction(layer, glStyle, 'taustakartta')
+  return layer
 }

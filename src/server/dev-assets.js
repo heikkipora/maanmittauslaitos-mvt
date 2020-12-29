@@ -6,7 +6,7 @@ export function bindDevAssets(app) {
   app.get('/client.js', browserify('src/client/index.js', {
     transform: [['babelify', {
       global: true,
-      ignore: [/\/node_modules\/(?!ol\/)/],
+      ignore: [/\/node_modules\/(?!ol.*\/)/],
       presets: ["@babel/env", "@babel/react"]
     }]]
   }))
