@@ -33,8 +33,11 @@ async function fetchTiles(db, client, apiKey, zoom, bbox, concurrency) {
 
   for (const [i, row] of rows.entries()) {
     await Promise.map(columns, async (column) => {
-      const tile = await fetchTileWithRetry(client, row, column, zoom, apiKey)
-      await db.putTile(tile, zoom, column, row)
+      const hasTile = await db.hasTile(zoom, column, row)
+      if (!hasTile) {
+        const tile = await fetchTileWithRetry(client, row, column, zoom, apiKey)
+        await db.putTile(tile, zoom, column, row)  
+      }
     }, {concurrency})
     const percentage = (i + 1) / rows.length * 100
     console.log(`${percentage.toFixed(1)} %`)
