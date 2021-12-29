@@ -15,29 +15,29 @@
   },
   "dependencies": {
     "@mapbox/mbtiles": "0.12.1",
-    "axios": "0.21.1",
+    "axios": "0.24.0",
     "bluebird": "3.7.2",
-    "commander": "6.2.1",
+    "commander": "8.3.0",
     "compression": "1.7.4",
-    "express": "4.17.1",
-    "lodash": "4.17.20"
+    "express": "4.17.2",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/plugin-proposal-object-rest-spread": "7.12.1",
-    "@babel/plugin-transform-runtime": "7.12.10",
-    "@babel/preset-env": "7.12.11",
-    "@babel/preset-react": "7.12.10",
+    "@babel/core": "7.16.5",
+    "@babel/plugin-proposal-class-properties": "7.16.5",
+    "@babel/plugin-proposal-object-rest-spread": "7.16.5",
+    "@babel/plugin-transform-runtime": "7.16.5",
+    "@babel/preset-env": "7.16.5",
+    "@babel/preset-react": "7.16.5",
     "babelify": "10.0.0",
     "browserify": "17.0.0",
     "browserify-middleware": "8.1.1",
-    "classnames": "2.2.6",
+    "classnames": "2.3.1",
     "less-middleware": "3.1.0",
-    "ol": "6.5.0",
-    "ol-mapbox-style": "6.3.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "ol": "6.10.0",
+    "ol-mapbox-style": "6.8.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "engines": {
     "node": ">=14.0.0"
