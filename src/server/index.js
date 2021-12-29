@@ -1,13 +1,15 @@
-import program  from 'commander'
+import {program}  from 'commander'
 import {initServer} from './tile-server.js'
 
-const cmd = program
+program
   .requiredOption('--input [mbtiles]', 'Input file')
   .option('--port [port]', 'HTTP port to listen on', 3000)
-  .parse(process.argv)
 
-const {input} = cmd
-const port = Number(cmd.port)
+program.parse(process.argv)
+const options = program.opts()
+
+const {input} = options
+const port = Number(options.port)
 
 initServer(input, port)
   .then(() => console.log(`Tile server listening on port ${port}`))
